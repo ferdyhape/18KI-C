@@ -24,4 +24,9 @@ class Cart extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function itemOrder()
+    {
+        return $this->hasMany(ItemOrder::class);
+    }
 }

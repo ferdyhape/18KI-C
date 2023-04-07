@@ -17,4 +17,9 @@ class Produk extends Model
         'diskon',
         'harga',
     ];
+
+    public function itemorder()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
