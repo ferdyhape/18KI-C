@@ -21,8 +21,8 @@ Route::get('/', function () {
 
 //penggunaan middleware di akhir route tambahkan ->middleware('auth')
 
-Route::get('/login', [AuthController::class, 'index']);
-Route::post('/login', [AuthController::class, 'authenticate']);
-Route::get('/register', [AuthController::class, 'register']);
-Route::post('/register', [AuthController::class, 'store']);
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login.process')->middleware('guest');
+Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
+Route::post('/register', [AuthController::class, 'store'])->name('register.process')->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
