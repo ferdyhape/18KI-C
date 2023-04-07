@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama', 50);
             $table->string('email')->unique();
-            $table->string('alamat');
+            $table->string('alamat')->nullable();
+            $table->string('avatar');
             $table->string('password');
             $table->timestamps();
         });
