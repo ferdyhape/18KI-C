@@ -15,14 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->middleware('auth');
-
 //penggunaan middleware di akhir route tambahkan ->middleware('auth')
 
-Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [AuthController::class, 'authenticate'])->name('login.process')->middleware('guest');
-Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
-Route::post('/register', [AuthController::class, 'store'])->name('register.process')->middleware('guest');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::post('/login', [AuthController::class, 'authenticate'])->name('login.process');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'store'])->name('register.process');
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('index');
+    });
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
