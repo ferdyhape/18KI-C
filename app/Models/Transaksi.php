@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Itemtransaksi;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,5 +26,15 @@ class Transaksi extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get all of the comments for the Transaksi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function itemtransaksis()
+    {
+        return $this->hasMany(Itemtransaksi::class);
     }
 }
