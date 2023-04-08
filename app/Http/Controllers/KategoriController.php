@@ -14,7 +14,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $data['kategori'] = Kategori::all();
+        $data['kategoris'] = Kategori::all();
         return view('kategori', $data);
     }
 
