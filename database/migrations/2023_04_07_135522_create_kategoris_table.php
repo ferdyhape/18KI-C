@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama', 50);
             $table->string('deskripsi')->nullable();
+            $table->integer('jumlah_produk')->default(0);
             $table->timestamps();
         });
     }

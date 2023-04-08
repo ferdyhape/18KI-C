@@ -11,7 +11,11 @@ class Transaksi extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'transaksi_id';
+    public $incrementing =false;
+
     protected $fillable = [
+        'transaksi_id',
         'user_id',
         'total_harga',
         'tunai',
@@ -33,7 +37,7 @@ class Transaksi extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function itemtransaksis()
+    public function itemTransaksis()
     {
         return $this->hasMany(Itemtransaksi::class);
     }
