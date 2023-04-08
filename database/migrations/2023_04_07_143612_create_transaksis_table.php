@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transaksis', function (Blueprint $table) {
-            $table->id();
+            $table->string('transaksi_id', 8)->primary()->unique();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->integer('total_harga');
             $table->integer('tunai');

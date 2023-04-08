@@ -18,7 +18,7 @@ class Produk extends Model
         'harga',
     ];
 
-    public function itemorder()
+    public function itemOrder()
     {
         return $this->hasMany(Cart::class);
     }
