@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
             $table->string('nama', 50);
             $table->string('gambar');
             $table->string('deskripsi')->nullable();
             $table->integer('stok');
-            $table->integer('diskon');
+            $table->integer('diskon')->default(0);
             $table->integer('harga');
             $table->timestamps();
         });
