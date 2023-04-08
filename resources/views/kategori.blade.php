@@ -27,7 +27,9 @@
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Kategori</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form action="/kategori/edit/{{ $kategori['id'] }}" >
+                                    <form action="/kategori/edit/{{ $kategori['id'] }}" method="post" >
+                                        @csrf
+                                        @method('PUT')
                                         <div class="modal-body">
                                             <table style="width: 100%;">
                                                 <tr>
@@ -80,15 +82,15 @@
                                 @error('nama')
                                     <div class="form-text">{{ $message }}</div>
                                 @enderror
-                            <td>
+                            </td>
                         </tr>
                         <tr>
                             <td>deskripsii</td>
-                            <td><textarea class="form-control my-3 @error('deskripsi') is-invalid @enderror" type="text" required placeholder="deskripsi" name="deskripsi">
+                            <td><textarea class="form-control my-3 @error('deskripsi') is-invalid @enderror" type="text" placeholder="deskripsi" name="deskripsi"></textarea>
                                 @error('deskripsi')
                                     <div class="form-text">{{ $message }}</div>
                                 @enderror
-                            <td>
+                            </td>
                         </tr>
                     </table>
                 </div>

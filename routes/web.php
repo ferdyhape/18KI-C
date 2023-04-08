@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 
     //CRUD Kategori
     Route::get('/kategori', [KategoriController::class, 'index']);
-    Route::get('/kategori/add', [KategoriController::class, 'istore']);
-    Route::put('/kategori/update/{id}', [KategoriController::class, 'update']);
+    Route::get('/kategori/add', [KategoriController::class, 'store']);
+    Route::put('/kategori/edit/{id}', [KategoriController::class, 'update']);
     Route::get('/kategori/delete/{id}', [KategoriController::class, 'destroy']);
 });

@@ -36,14 +36,27 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->validate([
+        //     'nama' => 'required', 'string', 'max:50',
+        //     'deskripsi' => 'string', 'max:255'
+        // ]);
+        // Kategori::create([
+        //     'nama' => $request->nama,
+        //     'deskripsi' => $request->deskripsi
+        // ]);
+        // return redirect('/kategori');
+
+
         $request->validate([
-            'nama' => 'required', 'string', 'max:50',
-            'deskripsi' => 'string', 'max:255'
+            'nama' => ['required',  'string', 'max:50'],
+            'deskripsi' => ['max:255']
         ]);
-        Kategori::created([
-            'nama' => $request->kategori,
-            'deskripsi' => $request->kategori
+
+        Kategori::create([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi
         ]);
+
         return redirect('/kategori');
     }
 
@@ -88,7 +101,7 @@ class KategoriController extends Controller
         }
         
         $kategori->save();
-        return view('/kategori');
+        return redirect('/kategori');
 
 
     }
@@ -102,6 +115,6 @@ class KategoriController extends Controller
     public function destroy($id)
     {
         Kategori::destroy($id);
-        return view('kategori');
+        return redirect('kategori');
     }
 }
