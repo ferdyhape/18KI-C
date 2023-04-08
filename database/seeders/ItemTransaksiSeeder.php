@@ -1,0 +1,27 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Itemtransaksi;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class ItemTransaksiSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Itemtransaksi::create([
+            'transaksi_id' => '1',
+            'nama_produk' => 'Nasi Goreng',
+            'jumlah_barang' => 2,
+            'sub_total' => 20000,
+            'diskon' => 0,
+            'harga' => 10000,
+        ]);
+    }
+}
