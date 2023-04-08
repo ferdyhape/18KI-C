@@ -21,5 +21,11 @@ class ItemOrderSeeder extends Seeder
             'jumlah_barang' => 2,
             'sub_total' => 20000,
         ]);
+        ItemOrder::create([
+            'cart_id' => '1',
+            'produk_id' => 2,
+            'jumlah_barang' => 2,
+            'sub_total' => 24000,
+        ]);
     }
 }
