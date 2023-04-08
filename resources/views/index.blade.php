@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Login Page')
+@section('title', '18KI-C')
 @section('content')
     ini adalah halaman home
     <form action="/logout" method="POST">
