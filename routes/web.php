@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,16 @@ Route::middleware('auth')->group(function () {
         return view('index');
     });
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+
+    Route::get('/produk/add', [ProdukController::class, 'create']);
+    // store = menyimpan data yang baru diinput
+    Route::get('/produk/{id}/edit', [ProdukController::class, 'edit']);
+    Route::get('/produk/{id}/delete', [ProdukController::class, 'destroy']);
+
+    Route::post('/produk', [ProdukController::class, 'store']);
+    Route::put('/produk/{id}', [ProdukController::class, 'update']);
+
     //Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
     Route::get('/cart/add', [CartController::class, 'tambahCart']);
@@ -43,4 +55,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/kategori/add', [KategoriController::class, 'store']);
     Route::put('/kategori/edit/{id}', [KategoriController::class, 'update']);
     Route::get('/kategori/delete/{id}', [KategoriController::class, 'destroy']);
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 });

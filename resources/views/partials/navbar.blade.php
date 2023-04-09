@@ -10,7 +10,7 @@
             <a class="nav-link active" aria-current="page" href="/">Index</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Produk</a>
+            <a class="nav-link" href="/produk">Produk</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/kategori">Kategori</a>
@@ -46,4 +46,4 @@
         </form>
       </div>
     </div>
-  </nav>
+</nav>
