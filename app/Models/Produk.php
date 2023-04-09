@@ -16,10 +16,15 @@ class Produk extends Model
         'stok',
         'diskon',
         'harga',
+        'kategori_id',
     ];
 
     public function itemOrder()
     {
         return $this->hasMany(Cart::class);
+    }
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
     }
 }
