@@ -60,6 +60,23 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
+                                                        <td>Kategori</td>
+                                                        <td>
+                                                            <select
+                                                                class="form-control @error('kategori_id') is-invalid @enderror"
+                                                                name="kategori_id" required>
+                                                                @foreach ($kategoris as $kategori)
+                                                                    <option value="{{ $kategori->id }}"
+                                                                        {{ $kategori->id == $produk->kategori_id ? 'selected' : '' }}>
+                                                                        {{ $kategori->nama }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('produk')
+                                                                <div class="form-text">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>Deskripsi</td>
                                                         <td><input
                                                                 class="form-control my-3 @error('produk') is-invalid @enderror"

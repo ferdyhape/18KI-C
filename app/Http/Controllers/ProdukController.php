@@ -107,13 +107,14 @@ class ProdukController extends Controller
         // dd($request);
         $validated = $request->validate([
             'nama' => 'required',
-            'gambar' => 'required',
+            'gambar' => 'nullable',
             'deskripsi' => 'required',
+            'kategori_id' => 'required|numeric',
             'stok' => 'required',
             'diskon' => 'required|numeric',
             'harga' => 'required|numeric',
         ]);
-
+        // dd($validated);
         $product = Produk::find($id);
 
         if ($request->file('gambar')) {
@@ -127,6 +128,7 @@ class ProdukController extends Controller
         $product->update([
             'nama' => $validated['nama'],
             'gambar' => $validated['gambar'],
+            'kategori_id' => $validated['kategori_id'],
             'deskripsi' => $validated['deskripsi'],
             'stok' => $validated['stok'],
             'diskon' => $validated['diskon'],
