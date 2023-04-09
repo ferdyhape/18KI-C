@@ -16,17 +16,24 @@
             <a class="nav-link" href="/kategori">Kategori</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cart</a>
+            <a class="nav-link" href="/cart">Cart</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Cart
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
+              @foreach ($carts as $cart)
+                <li><a class="dropdown-item" href="/cart/{{$cart->id}}">{{$cart->id}}</a></li>
+              @endforeach
+              <li><a class="dropdown-item" href="/cart/add">Tambah cart</a></li>
+
+
+
+              {{-- <li><a class="dropdown-item" href="#">Action</a></li>
               <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
             </ul>
           </li>
           <li class="nav-item">

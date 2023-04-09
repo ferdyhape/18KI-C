@@ -16,6 +16,7 @@ class TransaksiSeeder extends Seeder
     public function run()
     {
         Transaksi::create([
+            'transaksi_id' => 'RUIWEOWE',
             'user_id' => '1',
             'total_harga' => 20000,
             'tunai' => 100000,

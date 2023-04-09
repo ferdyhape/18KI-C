@@ -16,7 +16,7 @@ class ItemTransaksiSeeder extends Seeder
     public function run()
     {
         Itemtransaksi::create([
-            'transaksi_id' => '1',
+            'transaksi_id' => 'RUIWEOWE',
             'nama_produk' => 'Nasi Goreng',
             'jumlah_barang' => 2,
             'sub_total' => 20000,

@@ -8,6 +8,7 @@
             <tr>
                 <th scope="col">Kode Kategori</th>
                 <th scope="col">Nama Kategori</th>
+                <th scope="col">Deskripsi</th>
                 <th scope="col">Jumlah Produk</th>
                 <th scope="col">Aksi</th>
             </tr>
@@ -61,7 +62,6 @@
                     </td>
                     <td><a class="btn btn-danger" href="/kategori/delete/{{ $kategori['id'] }}">hapus</a></td>
                 </tr>
-                
             @endforeach
         </tbody>
     </table>

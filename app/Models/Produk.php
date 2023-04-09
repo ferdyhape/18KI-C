@@ -22,4 +22,8 @@ class Produk extends Model
     {
         return $this->hasMany(Cart::class);
     }
+
+    public function produk(){
+        return $this->belongsTo(Kategori::class);
+    }
 }

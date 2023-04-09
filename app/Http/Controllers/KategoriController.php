@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KategoriController extends Controller
 {
@@ -15,6 +17,7 @@ class KategoriController extends Controller
     public function index()
     {
         $data['kategoris'] = Kategori::all();
+        $data['carts'] = Cart::where('user_id', 'like', Auth::user()->id)->get();
         return view('kategori', $data);
     }
 
@@ -91,13 +94,13 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kategori = Kategori::find($id)->first();
+        $kategori = Kategori::find($id);
 
         if($request->nama){
             $kategori->nama = $request->nama;
         }
         if($request->deskripsi){
-            $kategori->deskrisi = $request->deskripsi;
+            $kategori->deskripsi = $request->deskripsi;
         }
         
         $kategori->save();

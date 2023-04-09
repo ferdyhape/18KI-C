@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +32,15 @@ Route::middleware('auth')->group(function () {
         return view('index');
     });
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    //Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+    Route::get('/cart/add', [CartController::class, 'tambahCart']);
+    Route::get('/cart/{id}', [CartController::class, 'index']);
+    Route::get('/item/add/{id}', [CartController::class, 'tambahItem']);
+    
+    //CRUD KATEGORI
+    Route::get('/kategori', [KategoriController::class, 'index']);
+    Route::get('/kategori/add', [KategoriController::class, 'store']);
+    Route::put('/kategori/edit/{id}', [KategoriController::class, 'update']);
+    Route::get('/kategori/delete/{id}', [KategoriController::class, 'destroy']);
 });

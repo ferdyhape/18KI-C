@@ -13,7 +13,10 @@
 </head>
 
 <body>
+    @auth
+        
     @include('partials.navbar')
+    @endauth
     <div class="container">
         @yield('content')
     </div>

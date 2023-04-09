@@ -14,4 +14,6 @@ class Kategori extends Model
         'deskripsi',
         'jumlah_produk'
     ];
+
+    
 }
