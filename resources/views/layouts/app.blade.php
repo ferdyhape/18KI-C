@@ -14,13 +14,13 @@
 
 <body>
     @auth
-        
-    @include('partials.navbar')
+
+        @include('partials.navbar')
     @endauth
     <div class="container">
         @yield('content')
     </div>
-    
+
 </body>
 
 </html>
