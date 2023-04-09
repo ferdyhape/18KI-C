@@ -37,7 +37,7 @@ class CartController extends Controller
     //             ->offset(0)
     //             ->limit(1)
     //             ->first();
-        
+
     //     if ($item_order->isEmpty()) {
     //         $item_order = null;
     //     } else {
@@ -58,10 +58,11 @@ class CartController extends Controller
     //         'user_cart' => $userCart,
     //     ]);
     // }
-    
+
     //INI CARAKU, NTar kalo ngejalanin tinggal di unkomen aja.............
 
-    public function index($id){
+    public function index($id)
+    {
         $data['orders'] = ItemOrder::where('cart_id', 'like', $id)->get();
         $data['cart'] = Cart::find($id);
         $data['produks'] = Produk::all();
@@ -69,27 +70,63 @@ class CartController extends Controller
         return view('cart.coba', $data);
     }
 
-    public function tambahCart(){
-
+    public function tambahCart()
+    {
         $cart = Cart::create([
             'user_id' => Auth::user()->id
         ]);
         return redirect("/cart/$cart->id");
     }
 
-    public function tambahItem(Request $request, $id){
+    public function tambahItem(Request $request, $id)
+    {
+        $productAdd = ItemOrder::where('produk_id', $request->produk_id)
+            ->where('cart_id', $id)->first();
+
+        $item_order['cart_id'] = null;
+        $item_order['produk_id'] = null;
+        $item_order['jumlah_barang'] = null;
+        $item_order['sub_total'] = null;
+        $tambahHarga = 0;
+
         $cart = Cart::find($id);
         $produk = Produk::find($request->produk_id);
-        $item_order = ItemOrder::create([
-            'cart_id' => $id,
-            'produk_id' => $produk->id,
-            'jumlah_barang' => $request->jumlah_barang,
-            'sub_total' => ((( 100 -  $produk->diskon) / 100 ) * ( $request->jumlah_barang * $produk->harga ))
-        ]);
 
-        $cart->total_harga = $cart->total_harga + $item_order->sub_total;
+        if (is_null($productAdd)) {
+            $productAdd = ItemOrder::create([
+                'cart_id' => $id,
+                'produk_id' => $produk->id,
+                'jumlah_barang' => $request->jumlah_barang,
+                'sub_total' => (((100 -  $produk->diskon) / 100) * ($request->jumlah_barang * $produk->harga))
+            ]);
+            $cart->total_harga = $cart->total_harga + $productAdd->sub_total;
+        } else {
+            // $productAdd->jumlah_barang + 
+            $tambahHarga = (((100 -  $produk->diskon) / 100) * ($request->jumlah_barang * $produk->harga));
+
+            $productAdd->update([
+                'jumlah_barang' => $productAdd->jumlah_barang + $request->jumlah_barang,
+                'sub_total' => $productAdd->sub_total + $tambahHarga
+            ]);
+            // $productAdd['qty'] += $newCart['qty'];
+            // $productAdd->save();
+            $cart->total_harga = $cart->total_harga + $tambahHarga;
+        }
+
+        // dd($productAdd->sub_total);
         $cart->save();
 
         return redirect("/cart/$id");
+    }
+
+    public function hapusItem($cart_id, $item_id)
+    {
+        $cart = Cart::find($cart_id);
+        $item = ItemOrder::find($item_id);
+        $cart->total_harga = $cart->total_harga - $item->sub_total;
+        $cart->save();
+        $item->delete();
+
+        return redirect("cart/$cart_id");
     }
 }
