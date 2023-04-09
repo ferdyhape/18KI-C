@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,13 @@ Route::middleware('auth')->group(function () {
     });
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+
+    Route::get('/produk/add', [ProdukController::class, 'create']);
+    // store = menyimpan data yang baru diinput
+    Route::get('/produk/{id}/edit', [ProdukController::class, 'edit']);
+    Route::get('/produk/{id}/delete', [ProdukController::class, 'destroy']);
+
+    Route::post('/produk', [ProdukController::class, 'store']);
+    Route::put('/produk/{id}', [ProdukController::class, 'update']);
 });
