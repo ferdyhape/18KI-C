@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Itemtransaksi;
+use App\Models\Transaksi;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,8 +16,9 @@ class ItemTransaksiSeeder extends Seeder
      */
     public function run()
     {
+        $randomTransaksi = Transaksi::inRandomOrder()->first();
         Itemtransaksi::create([
-            'transaksi_id' => '1',
+            'transaksi_id' => $randomTransaksi['id'],
             'nama_produk' => 'Nasi Goreng',
             'jumlah_barang' => 2,
             'sub_total' => 20000,
