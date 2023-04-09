@@ -18,7 +18,7 @@ class ItemTransaksiSeeder extends Seeder
     {
         $randomTransaksi = Transaksi::inRandomOrder()->first();
         Itemtransaksi::create([
-            'transaksi_id' => 'RUIWEOWE',
+            'transaksi_id' => $randomTransaksi['id'],
             'nama_produk' => 'Nasi Goreng',
             'jumlah_barang' => 2,
             'sub_total' => 20000,

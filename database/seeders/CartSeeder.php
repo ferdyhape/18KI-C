@@ -17,7 +17,7 @@ class CartSeeder extends Seeder
     {
         Cart::create([
             'user_id' => '1',
-            'total_harga' => 20000,
+            'total_harga' => 0,
         ]); //
     }
 }
