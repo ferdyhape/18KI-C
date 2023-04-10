@@ -81,6 +81,11 @@ class CartController extends Controller
     public function tambahItem(Request $request, $id)
     {
         $productAdd = ItemOrder::where('produk_id', $request->produk_id)->where('cart_id', $id)->first();
+        $produk = Produk::find($request->produk_id);
+
+        $request->validate([
+            'jumlah_barang' => 'required|integer|min:0|max:' . $produk->stok,
+        ]);
 
         $item_order['cart_id'] = null;
         $item_order['produk_id'] = null;
@@ -88,34 +93,26 @@ class CartController extends Controller
         $item_order['sub_total'] = null;
         $tambahHarga = 0;
 
-        $cart = Cart::find($id);
-        $produk = Produk::find($request->produk_id);
-
         if (is_null($productAdd)) {
+            $productAdd = ItemOrder::where('cart_id', $id)->with(['produk', 'cart'])->get()->first();
             $productAdd = ItemOrder::create([
                 'cart_id' => $id,
                 'produk_id' => $produk->id,
                 'jumlah_barang' => $request->jumlah_barang,
                 'sub_total' => (((100 -  $produk->diskon) / 100) * ($request->jumlah_barang * $produk->harga))
             ]);
-            $cart->total_harga = $cart->total_harga + $productAdd->sub_total;
+            $productAdd->cart->total_harga = $productAdd->cart->total_harga + $productAdd->sub_total;
         } else {
-            // $productAdd->jumlah_barang + 
-            $tambahHarga = (((100 -  $produk->diskon) / 100) * ($request->jumlah_barang * $produk->harga));
+            $tambahHarga = (((100 - $productAdd->produk->diskon) / 100) * ($request->jumlah_barang * $productAdd->produk->harga));
 
             $productAdd->update([
                 'jumlah_barang' => $productAdd->jumlah_barang + $request->jumlah_barang,
                 'sub_total' => $productAdd->sub_total + $tambahHarga
             ]);
-            // $productAdd['qty'] += $newCart['qty'];
-            // $productAdd->save();
-            $cart->total_harga = $cart->total_harga + $tambahHarga;
+            $productAdd->cart->total_harga = $productAdd->cart->total_harga + $tambahHarga;
         }
-
-        // dd($productAdd->sub_total);
-        $cart->save();
+        $productAdd->cart->save();
         $produk->update(['stok' => $produk->stok - $request->jumlah_barang]);
-
         return redirect("/cart/$id");
     }
 
