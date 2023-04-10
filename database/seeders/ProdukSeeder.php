@@ -37,7 +37,7 @@ class ProdukSeeder extends Seeder
             'deskripsi' => 'Ini adalah deskripsi Es Teh',
             'stok' => 939,
             'harga' => '12000',
-            'kategori_id' => 1,
+            'kategori_id' => 2,
         ]);
         Produk::create([
             'nama' => 'Es bukan teh',
@@ -45,7 +45,7 @@ class ProdukSeeder extends Seeder
             'deskripsi' => 'Ini adalah deskripsi Es bukan teh',
             'stok' => 991,
             'harga' => '12000',
-            'kategori_id' => 1,
+            'kategori_id' => 2,
         ]);
     }
 }

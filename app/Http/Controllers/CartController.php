@@ -80,8 +80,7 @@ class CartController extends Controller
 
     public function tambahItem(Request $request, $id)
     {
-        $productAdd = ItemOrder::where('produk_id', $request->produk_id)
-            ->where('cart_id', $id)->first();
+        $productAdd = ItemOrder::where('produk_id', $request->produk_id)->where('cart_id', $id)->first();
 
         $item_order['cart_id'] = null;
         $item_order['produk_id'] = null;
@@ -115,6 +114,7 @@ class CartController extends Controller
 
         // dd($productAdd->sub_total);
         $cart->save();
+        $produk->update(['stok' => $produk->stok - $request->jumlah_barang]);
 
         return redirect("/cart/$id");
     }
@@ -123,10 +123,17 @@ class CartController extends Controller
     {
         $cart = Cart::find($cart_id);
         $item = ItemOrder::find($item_id);
-        $cart->total_harga = $cart->total_harga - $item->sub_total;
-        $cart->save();
+        $produk = Produk::find($item->produk_id);
+        $cart->update(['total_harga' => $cart->total_harga - $item->sub_total]);
+        $produk->update(['stok' => $produk->stok + $item->jumlah_barang]);
         $item->delete();
 
         return redirect("cart/$cart_id");
     }
+
+    // public function updateItem($id){
+    //     $item = ItemOrder::find($id);
+    //     $produk = Produk::find($item->produk_id);
+    //     $item->update([]);
+    // }
 }

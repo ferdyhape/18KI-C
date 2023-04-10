@@ -12,6 +12,7 @@
                     <th scope="col">Nama Produk</th>
                     <th scope="col">Deskripsi Produk</th>
                     <th scope="col">Gambar</th>
+                    <th scope="col">Stok</th>
                     <th scope="col">Diskon</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Kategori</th>
@@ -27,6 +28,7 @@
                         <td>
                             <img src="{{ asset('storage/' . $produk->gambar) }}" class="img-thumbnail" alt="gambar-produk">
                         </td>
+                        <td>{{ $produk->stok }}</td>
                         <td>{{ $produk->diskon }}</td>
                         <td>{{ $produk->harga }}</td>
                         <td>{{ $produk->kategori->nama }}</td>

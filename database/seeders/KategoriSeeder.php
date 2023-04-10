@@ -18,10 +18,12 @@ class KategoriSeeder extends Seeder
         Kategori::create([
             'nama' => 'Makanan',
             'deskripsi' => 'Ini adalah deskripsi makanan',
+            'jumlah_produk' => 2
         ]);
         Kategori::create([
             'nama' => 'Minuman',
             'deskripsi' => 'Ini adalah deskripsi minuman',
+            'jumlah_produk' => 2
         ]);
     }
 }

@@ -70,6 +70,11 @@ class ProdukController extends Controller
             'harga' => $validated['harga'],
         ]);
 
+        $Kategori = Kategori::find($validated['kategori_id']);
+
+        $Kategori->update(['jumlah_produk' => $Kategori->jumlah_produk + 1]);
+
+
         return redirect('/produk');
     }
 

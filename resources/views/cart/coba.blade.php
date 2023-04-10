@@ -76,34 +76,42 @@
                             <td>{{ $item->produk->id }}</td>
                             <td>{{ $item->produk->nama }}</td>
                             <td>{{ $item->produk->kategori->nama }}</td>
-                            <td class="text-end" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                {{ $id = $item['id'] }}>{{ $item->jumlah_barang }}</td>
+                            <td class="text-end" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item['id'] }}">{{ $item->jumlah_barang }}</td>
                             <td class="text-end">@toRP($item->produk->harga)</td>
                             <td class="text-end">{{ $item->produk->diskon }}</td>
                             <td class="text-end">@toRP($item->sub_total)</td>
-                            {{-- <td class="d-flex justify-content-center"><a class="btn btn-danger"
-                                    href="/cart/delete/{{ $item['id'] }}">hapus</a></td> --}}
                             <td>
-                                <form action="{{ url('cart/' . $cart->id . '/delete/' . $item['id']) }}" method="POST">
+                                <form action="{{ url('cart/' . $cart->id. '/delete'.'/'.$item['id']) }}" method="POST">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-danger"
                                         onclick="return confirm('beneran mau hapus?')">Hapus</button>
                                 </form>
                             </td>
-
                         </tr>
+                        {{-- <div class="modal fade" id="#exampleModal{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Jumlah Produk</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="/item/update/{{ $item->id }}">
+                                        <div class="modal-body">
+                                            <input class="form-control" disabled type="text" placeholder="{{ $item->produk->nama }}" name="jumlah_barang">
+                                        </div>
+                                        <div class="modal-body">
+                                            <input class="form-control" required type="number" placeholder="jumlah" name="jumlah_barang">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Tambahkan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div> --}}
                     @endforeach
-                    {{-- <tr>
-                    <td>1</td>
-                    <td>Indomie Jumbo</td>
-                    <td>Makanan</td>
-                    <td>5</td>
-                    <td class="text-end">4500</td>
-                    <td class="text-end">0</td>
-                    <td class="text-end">4500</td>
-                    <td class="d-flex justify-content-center"><a class="btn btn-danger" href="/cart/delete/" >hapus</a></td>
-                </tr> --}}
                 </tbody>
             </table>
             <div class="row justify-content-end m-0 mt-auto" style="width: 100%">
@@ -126,26 +134,6 @@
                         <button class="btn btn-success">Bayar</button>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Jumlah Produk</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="/cart/edit/">
-                    <div class="modal-body">
-                        <input class="form-control" required type="number" placeholder="jumlah" name="count">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Tambahkan</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
