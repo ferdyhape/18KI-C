@@ -82,7 +82,6 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        
     }
 
     /**
@@ -96,17 +95,15 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::find($id);
 
-        if($request->nama){
+        if ($request->nama) {
             $kategori->nama = $request->nama;
         }
-        if($request->deskripsi){
+        if ($request->deskripsi) {
             $kategori->deskripsi = $request->deskripsi;
         }
-        
+
         $kategori->save();
         return redirect('/kategori');
-
-
     }
 
     /**

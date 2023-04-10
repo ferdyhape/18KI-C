@@ -75,7 +75,7 @@ class ProdukController extends Controller
         $Kategori->update(['jumlah_produk' => $Kategori->jumlah_produk + 1]);
 
 
-        return redirect('/produk');
+        return redirect('/produk')->with('toast_success', 'Data successfully updated');
     }
 
     /**
