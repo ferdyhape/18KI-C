@@ -5,7 +5,7 @@
     <table class="table table-striped table-hover mt-3">
         <thead class="table-secondary">
             <tr>
-                <th scope="col">Kode Kategori</th>
+                <th scope="col">No</th>
                 <th scope="col">Nama Kategori</th>
                 <th scope="col">Deskripsi</th>
                 <th scope="col" class="text-center">Jumlah Produk</th>
@@ -15,13 +15,13 @@
         <tbody>
             @foreach ($kategoris as $kategori)
                 <tr class="align-middle">
-                    <td>{{ $kategori['id'] }}</td>
+                    <td class="text-center">{{ $loop->iteration }} </td>
                     <td>{{ $kategori['nama'] }}</td>
                     <td>{{ $kategori['deskripsi'] }}</td>
-                    <td>{{ $kategori['jumlah_produk'] }}</td>
+                    <td class="text-center">{{ $kategori['jumlah_produk'] }}</td>
                     <td>
                         <div class="d-flex justify-content-center gap-2">
-                            <a class="btn btn-outline-secondary" data-bs-toggle="modal"
+                            <a class="btn btn-warning" data-bs-toggle="modal"
                                 data-bs-target="#editCategory{{ $kategori['id'] }}">
                                 <i class="bi bi-pencil-square"></i></a>
                             <a class="btn btn-danger" href="/kategori/delete/{{ $kategori['id'] }}">
