@@ -11,13 +11,14 @@
                     <a class="nav-link text-white {{ request()->is('kategori') ? 'border-bottom border-2' : '' }}"
                         href="{{ url('/kategori') }}">Kategori</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li
+                    class="nav-item dropdown {{ Route::currentRouteName() == 'cart.id' ? 'border-bottom border-2' : '' }}">
                     <a class="nav-link text-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Cart
                     </a>
                     <ul class="dropdown-menu">
                         @foreach ($carts as $cart)
-                            <li><a class="dropdown-item" href="/cart/{{ $cart->id }}">{{ $cart->id }}</a>
+                            <li><a class="dropdown-item" href="/cart/{{ $cart->id }}">Cart {{ $cart->id }}</a>
                             </li>
                         @endforeach
                         <li><a class="dropdown-item" href="/cart/add">Tambah cart</a></li>

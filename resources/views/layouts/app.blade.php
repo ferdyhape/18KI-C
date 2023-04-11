@@ -19,8 +19,14 @@
 </head>
 
 <body>
+    @if (Route::currentRouteName() != 'login')
+        <style>
+            body {
+                background-image: url("/assets/image/bg3.jpg");
+            }
+        </style>
+    @endif
     @auth
-
         @include('partials.navbar')
     @endauth
     <div class="container">
