@@ -1,142 +1,172 @@
 @extends('layouts.app')
 @section('title', 'Cart')
 @section('content')
-    <div class="p-3" style="height: 100%;">
-        <div class="card p-3 d-flex" style="height: 100%">
-            <div class="row m-0">
-                <div class="col-5 me-3 d-flex justify-content-center" style="height: 100%">
-                    <table style="width: 100%; height: 100%;">
+    <div class="d-flex justify-content-center gap-3 my-4">
+        <div class="col-7" id="kasir-tabel">
+            <div class="card shadow shadow-sm border-0">
+                <div class="card-header">
+                    <p>Produk Detail</p>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Produk</th>
+                                <th>Jumlah</th>
+                                <th>Harga</th>
+                                <th>Diskon</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
                         <tbody>
-                            <tr>
-                                <td>Hari Tanggal</td>
-                                <td><input type="" class="form-control" disabled value="{{ date('d-m-y') }}" /></td>
-                            </tr>
-                            <tr>
-                                <td>Kasir</td>
-                                <td><input type="" class="form-control mt-2" disabled
-                                        value="{{ Auth::user()->nama }}" /></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col d-flex justify-content-center bg-dark-subtle p-3" style="height: 100%; width: 100%;">
-                    <table class="fs-1 text fw-bold"style="width: 100%;">
-                        <tbody>
-                            <tr>
-                                <td>TOTAL</td>
-                                <td>Rp.</td>
-                                <td class="text-end">{{ $cart->total_harga }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <form action="/item/add/{{ $cart->id }}">
-                <div class="row m-0 mt-3 " style="width: 100%">
-                    <div class="col p-0">
-                        <select class="form-select " required style="width: 100%" name="produk_id">
-                            <option selected>Pilih Produk</option>
-                            <table style="width: 100%">
-                                <tbody style="width: 100%">
-                                    @foreach ($produks as $produk)
-                                        <tr>
-                                            <option value="{{ $produk['id'] }}">
-                                                <td>{{ $produk['nama'] }}</td>
-                                            </option>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </select>
-                    </div>
-                    <div class="col-2 px-3">
-                        <input class="form-control" required type="number" placeholder="jumlah" name="jumlah_barang">
-                    </div>
-                    <div class="col-1 p-0">
-                        <button class="btn btn-primary" type="submit" style="width: 100%">Tambahkan</button>
-                    </div>
-                </div>
-            </form>
-            {{-- <button class="btn btn-primary mt-5">Cari produk</button> --}}
-            <table class="mt-3 table table-bordered">
-                <thead>
-                    <tr>
-                        <th class="text-center">id produk</th>
-                        <th class="text-center">produk</th>
-                        <th class="text-center">kategori</th>
-                        <th class="text-center">jumlah</th>
-                        <th class="text-center">harga</th>
-                        <th class="text-center">diskon</th>
-                        <th class="text-center">total harga</th>
-                        <th class="text-center">hapus</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($orders as $item)
-                        <tr>
-                            <td>{{ $item->produk->id }}</td>
-                            <td>{{ $item->produk->nama }}</td>
-                            <td>{{ $item->produk->kategori->nama }}</td>
-                            <td class="text-end" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item['id'] }}">
-                                {{ $item->jumlah_barang }}</td>
-                            <td class="text-end">@toRP($item->produk->harga)</td>
-                            <td class="text-end">{{ $item->produk->diskon }}</td>
-                            <td class="text-end">@toRP($item->sub_total)</td>
-                            <td>
-                                <form action="{{ url('cart/' . $cart->id . '/delete' . '/' . $item['id']) }}" method="POST">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger"
-                                        onclick="return confirm('beneran mau hapus?')">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
-                        {{-- <div class="modal fade" id="#exampleModal{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Jumlah Produk</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            @foreach ($orders as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->produk->nama }}</td>
+                                    <td data-bs-toggle="modal" data-bs-target="#editJumlah{{ $item['id'] }}">
+                                        <p class="border border-1 text-center rounded">
+                                            {{ $item->jumlah_barang }}
+                                        </p>
+                                    </td>
+                                    <td>@toRP($item->produk->harga)</td>
+                                    <td>{{ $item->produk->diskon }}%</td>
+                                    <td>
+                                        <form action="{{ url('cart/' . $cart->id . '/delete' . '/' . $item['id']) }}"
+                                            method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-danger" onclick="return confirm('beneran mau hapus?')"><i
+                                                    class="bi bi-trash3-fill"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <div class="modal fade" id="editJumlah{{ $item['id'] }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit jumlah
+                                                    {{ $item->produk->nama }}</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="/item/update/{{ $item->id }}">
+                                                <div class="modal-body">
+                                                    <div class="form-group mt-2">
+                                                        <input
+                                                            class="form-control mb-3 @error('jumlah_barang') is-invalid @enderror"
+                                                            type="number" name="jumlah_barang"
+                                                            value="{{ $item->jumlah_barang }}">
+                                                        @error('jumlah_barang')
+                                                            jumlah_barang
+                                                            <div class="form-text">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary"
+                                                        data-bs-dismiss="modal">Edit</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <form action="/item/update/{{ $item->id }}">
-                                        <div class="modal-body">
-                                            <input class="form-control" disabled type="text" placeholder="{{ $item->produk->nama }}" name="jumlah_barang">
-                                        </div>
-                                        <div class="modal-body">
-                                            <input class="form-control" required type="number" placeholder="jumlah" name="jumlah_barang">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Tambahkan</button>
-                                        </div>
-                                    </form>
                                 </div>
-                            </div>
-                        </div> --}}
-                    @endforeach
-                </tbody>
-            </table>
-            <div class="row justify-content-end m-0 mt-auto" style="width: 100%">
-                <div class="col-4">
-                    <form action="/transaction/add">
-                        <table style="width: 100% ">
-                            <tbody>
-                                <tr>
-                                    <td>Subtotal</td>
-                                    <td>Rp.</td>
-                                    <td class="text-end">@toRP($cart->total_harga)</td>
-                                </tr>
-                                <tr>
-                                    <td>Jumlah Bayar</td>
-                                    <td>Rp.</td>
-                                    <td class="text-end"><input class="form-control" name="pay"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button class="btn btn-success">Bayar</button>
-                    </form>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+        <div class="col-4" id="kasir-kalkulasi">
+            <div class="card shadow shadow-sm p-3 border-0">
+                <div class="d-flex justify-content-between">
+                    <p>Tanggal</p>
+                    <p>{{ date('d-m-y') }}
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>Kasir</p>
+                    <p>{{ Auth::user()->nama }}
+                    </p>
+                </div>
+                <hr>
+                @if (count($orders) == 0)
+                    <p class="text-center text-muted">!!! Produk belum ditambahkan !!!</p>
+                @else
+                    @foreach ($orders as $item)
+                        <div class="d-flex justify-content-between">
+                            <p>{{ $item->produk->nama }} * {{ $item->jumlah_barang }}</p>
+                            <p>@toRP($item->sub_total)
+                            </p>
+                        </div>
+                    @endforeach
+                @endif
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <p class="fw-semibold">Total</p>
+                    <p class="fw-semibold">@toRP($cart->total_harga)
+                    </p>
+                </div>
+                <div class="d-grid mt-2 gap-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Tambah Produk
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Produk</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <form action="/item/add/{{ $cart->id }}">
+                                    <div class="modal-body">
+                                        <div class="form-group mt-2">
+                                            <select class="form-control @error('produk_id') is-invalid @enderror"
+                                                id="produk_id" name="produk_id" required>
+                                                <option value="0" disabled selected>Pilih Produk</option>
+                                                @foreach ($produks as $produk)
+                                                    <option value="{{ $produk->id }}">{{ $produk->nama }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('produk_id')
+                                                <div class="form-text">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input class="form-control mb-3 @error('jumlah_barang') is-invalid @enderror"
+                                                type="number" name="jumlah_barang" placeholder="Jumlah">
+                                            @error('jumlah_barang')
+                                                jumlah_barang
+                                                <div class="form-text">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary" type="submit">Tambahkan</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                @if (count($orders) != 0)
+                    <div class="btn btn-sm btn-success">
+                        Bayar
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
     </div>
 @endsection

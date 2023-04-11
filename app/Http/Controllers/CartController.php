@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Cart;
-use App\Models\ItemOrder;
 use App\Models\Produk;
-use Illuminate\Auth\Events\Validated;
-use Illuminate\Support\Facades\Auth;
+use App\Models\ItemOrder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Route;
 
 
 class CartController extends Controller
@@ -19,7 +20,7 @@ class CartController extends Controller
         $data['cart'] = Cart::find($id);
         $data['produks'] = Produk::all();
         $data['carts'] = Cart::where('user_id', 'like', Auth::user()->id)->get();
-        return view('cart.coba', $data);
+        return view('cart.newcart', $data);
     }
 
     public function tambahCart()
@@ -68,7 +69,8 @@ class CartController extends Controller
         return redirect("cart/$cart_id");
     }
 
-    public function updateItem(Request $request, $id){
+    public function updateItem(Request $request, $id)
+    {
         $productAdd = ItemOrder::find($id)->with('produk', 'cart')->first();
 
         $request->validate([

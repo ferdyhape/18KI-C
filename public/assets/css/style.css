@@ -6,3 +6,12 @@
     color: #D2CFCF !important;
 }
   
+#kasir-tabel p {
+  margin-bottom: 0;
+}
+#kasir-kalkulasi p {
+  margin-bottom: 0;
+}
+#kasir-kalkulasi hr {
+  margin: 10px 0 10px;
+}

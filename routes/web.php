@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
     //Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
     Route::get('/cart/add', [CartController::class, 'tambahCart']);
-    Route::get('/cart/{id}', [CartController::class, 'index']);
+    Route::get('/cart/{id}', [CartController::class, 'index'])->name('cart.id');
     Route::get('/item/add/{id}', [CartController::class, 'tambahItem']);
     Route::get('/item/update/{id}', [CartController::class, 'updateItem']);
 
