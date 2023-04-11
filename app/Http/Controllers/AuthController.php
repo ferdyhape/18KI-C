@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('/')->with('success', 'Welcome back, ' . auth()->user()->nama);
         }
 
         return back()->withErrors([
@@ -50,7 +50,7 @@ class AuthController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData = User::create($validatedData);
 
-        return redirect('/login')->with('toast_success', 'Registration is successful, Please login!');
+        return redirect('/login')->with('toast_success', 'Register sukses, silahkan login!');
     }
 
     public function logout(Request $request)

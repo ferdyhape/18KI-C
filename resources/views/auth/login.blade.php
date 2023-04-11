@@ -2,13 +2,13 @@
 @section('title', 'Login')
 @section('content')
     <div class="my-5">
-        <div class="h3 text-center my-3">Login Page</div>
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-md-9 col-lg-6 col-xl-5">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid"
-                    alt="Sample image">
-            </div>
-            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <div class="h3 text-center my-3">Login</div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-9 col-lg-6 col-xl-4">
+                <div class="my-5">
+                    <img src="https://cdni.iconscout.com/illustration/free/thumb/signing-terms-of-services-2112511-1785593.png"
+                        class="img-fluid" alt="Sample image">
+                </div>
                 <form action="/login" method="POST">
                     @csrf
                     <!-- Email input -->
@@ -33,16 +33,16 @@
                             </div>
                         @enderror
                     </div>
-
-                    <div class="text-center text-lg-start pt-2 btn-sm">
-                        <button type="submit" class="btn btn-primary "
-                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Belum punya akun? <a href="{{ url('/register') }}"
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary ">Login</button>
+                        <p class="small fw-semibold text-center">Belum punya akun? <a href="{{ url('/register') }}"
                                 class="link-danger">Register</a></p>
                     </div>
-
-                </form>
             </div>
+
+            </form>
+
         </div>
+    </div>
     </div>
 @endsection

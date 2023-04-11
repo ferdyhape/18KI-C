@@ -52,15 +52,16 @@ class KategoriController extends Controller
 
         $request->validate([
             'nama' => ['required',  'string', 'max:50'],
-            'deskripsi' => ['max:255']
+            'deskripsi' => ['max:255'],
         ]);
 
         Kategori::create([
             'nama' => $request->nama,
+            'jumlah_produk' => 0,
             'deskripsi' => $request->deskripsi
         ]);
 
-        return redirect('/kategori');
+        return redirect('/kategori')->with('toast_success', 'Kategori berhasil ditambahkan');
     }
 
     /**
@@ -82,7 +83,6 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        
     }
 
     /**
@@ -96,17 +96,15 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::find($id);
 
-        if($request->nama){
+        if ($request->nama) {
             $kategori->nama = $request->nama;
         }
-        if($request->deskripsi){
+        if ($request->deskripsi) {
             $kategori->deskripsi = $request->deskripsi;
         }
-        
+
         $kategori->save();
-        return redirect('/kategori');
-
-
+        return redirect('/kategori')->with('toast_success', 'Kategori berhasil diupdate');
     }
 
     /**
@@ -118,6 +116,6 @@ class KategoriController extends Controller
     public function destroy($id)
     {
         Kategori::destroy($id);
-        return redirect('kategori');
+        return redirect('kategori')->with('toast_success', 'Kategori berhasil dimusnahkan');
     }
 }

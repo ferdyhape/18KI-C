@@ -31,7 +31,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return view('index');
+        return redirect('produk');
     });
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
