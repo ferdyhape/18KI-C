@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Cart')
 @section('content')
     <div class="p-3" style="height: 100%;">
         <div class="card p-3 d-flex" style="height: 100%">
@@ -76,12 +77,13 @@
                             <td>{{ $item->produk->id }}</td>
                             <td>{{ $item->produk->nama }}</td>
                             <td>{{ $item->produk->kategori->nama }}</td>
-                            <td class="text-end" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item['id'] }}">{{ $item->jumlah_barang }}</td>
+                            <td class="text-end" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item['id'] }}">
+                                {{ $item->jumlah_barang }}</td>
                             <td class="text-end">@toRP($item->produk->harga)</td>
                             <td class="text-end">{{ $item->produk->diskon }}</td>
                             <td class="text-end">@toRP($item->sub_total)</td>
                             <td>
-                                <form action="{{ url('cart/' . $cart->id. '/delete'.'/'.$item['id']) }}" method="POST">
+                                <form action="{{ url('cart/' . $cart->id . '/delete' . '/' . $item['id']) }}" method="POST">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-danger"
