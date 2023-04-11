@@ -67,7 +67,7 @@ class CartController extends Controller
         $data['cart'] = Cart::find($id);
         $data['produks'] = Produk::all();
         $data['carts'] = Cart::where('user_id', 'like', Auth::user()->id)->get();
-        return view('cart.coba', $data);
+        return view('cart.newcart', $data);
     }
 
     public function tambahCart()
