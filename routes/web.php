@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -59,5 +60,5 @@ Route::middleware('auth')->group(function () {
 
 
     Route::delete('/cart/{cart_id}/delete/{item_id}', [CartController::class, 'hapusItem']);
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
 });
