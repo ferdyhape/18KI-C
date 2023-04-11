@@ -76,7 +76,7 @@
                             <td>{{ $item->produk->id }}</td>
                             <td>{{ $item->produk->nama }}</td>
                             <td>{{ $item->produk->kategori->nama }}</td>
-                            <td class="text-end" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item['id'] }}">{{ $item->jumlah_barang }}</td>
+                            <td class="text-end" data-bs-toggle="modal" data-bs-target="#editJumlah{{ $item['id'] }}">{{ $item->jumlah_barang }}</td>
                             <td class="text-end">@toRP($item->produk->harga)</td>
                             <td class="text-end">{{ $item->produk->diskon }}</td>
                             <td class="text-end">@toRP($item->sub_total)</td>
@@ -89,7 +89,7 @@
                                 </form>
                             </td>
                         </tr>
-                        {{-- <div class="modal fade" id="#exampleModal{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="editJumlah{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -98,10 +98,10 @@
                                     </div>
                                     <form action="/item/update/{{ $item->id }}">
                                         <div class="modal-body">
-                                            <input class="form-control" disabled type="text" placeholder="{{ $item->produk->nama }}" name="jumlah_barang">
+                                            <input class="form-control" disabled type="text" placeholder="{{ $item->produk->nama }}" name="produk_id">
                                         </div>
                                         <div class="modal-body">
-                                            <input class="form-control" required type="number" placeholder="jumlah" name="jumlah_barang">
+                                            <input class="form-control" required type="number" placeholder="{{ $item->jumlah_barang }}" name="jumlah_barang">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -110,7 +110,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     @endforeach
                 </tbody>
             </table>

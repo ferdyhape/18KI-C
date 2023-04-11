@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart/add', [CartController::class, 'tambahCart']);
     Route::get('/cart/{id}', [CartController::class, 'index']);
     Route::get('/item/add/{id}', [CartController::class, 'tambahItem']);
+    Route::get('/item/update/{id}', [CartController::class, 'updateItem']);
 
     //CRUD KATEGORI
     Route::get('/kategori', [KategoriController::class, 'index']);

@@ -32,30 +32,22 @@
                         <td>{{ $produk->diskon }}</td>
                         <td>{{ $produk->harga }}</td>
                         <td>{{ $produk->kategori->nama }}</td>
-
-                        <td><a class="btn btn-outline-secondary" data-bs-toggle="modal"
-                                data-bs-target="#editproduct{{ $produk['id'] }}">ubah</a>
-                            <div class="modal fade" id="editproduct{{ $produk['id'] }}" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <td><a class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproduct{{ $produk['id'] }}">ubah</a>
+                            <div class="modal fade" id="editproduct{{ $produk['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Edit produk</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
                                         </div>
-                                        <form action="/produk/{{ $produk['id'] }}" method="post"
-                                            enctype="multipart/form-data">
+                                        <form action="/produk/{{ $produk['id'] }}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
                                                 <table style="width: 100%;">
                                                     <tr>
                                                         <td>Nama</td>
-                                                        <td><input
-                                                                class="form-control my-3 @error('produk') is-invalid @enderror"
-                                                                type="text" value="{{ $produk['nama'] }}"
-                                                                name="nama">
+                                                        <td><input class="form-control my-3 @error('produk') is-invalid @enderror" type="text" value="{{ $produk['nama'] }}" name="nama">
                                                             @error('produk')
                                                                 <div class="form-text">{{ $message }}</div>
                                                             @enderror
@@ -64,13 +56,9 @@
                                                     <tr>
                                                         <td>Kategori</td>
                                                         <td>
-                                                            <select
-                                                                class="form-control @error('kategori_id') is-invalid @enderror"
-                                                                name="kategori_id" required>
+                                                            <select class="form-control @error('kategori_id') is-invalid @enderror" name="kategori_id" required>
                                                                 @foreach ($kategoris as $kategori)
-                                                                    <option value="{{ $kategori->id }}"
-                                                                        {{ $kategori->id == $produk->kategori_id ? 'selected' : '' }}>
-                                                                        {{ $kategori->nama }}</option>
+                                                                    <option value="{{ $kategori->id }}"{{ $kategori->id == $produk->kategori_id ? 'selected' : '' }}>{{ $kategori->nama }}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('produk')
@@ -136,8 +124,7 @@
                                                 </table>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Batal</button>
+                                                <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Batal</button>
                                                 <button type="submit" class="btn btn-primary">Ubah</button>
                                             </div>
                                         </form>

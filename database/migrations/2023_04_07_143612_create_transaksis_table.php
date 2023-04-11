@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->integer('total_harga');
+            $table->double('total_harga');
             $table->integer('tunai');
             $table->integer('kembali');
             $table->timestamps();

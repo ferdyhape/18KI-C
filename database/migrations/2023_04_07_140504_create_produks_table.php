@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('deskripsi')->nullable();
             $table->integer('stok');
             $table->integer('diskon')->default(0);
-            $table->integer('harga');
+            $table->double('harga');
             $table->timestamps();
         });
     }

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('nama_produk', 50);
             $table->integer('jumlah_barang');
             $table->integer('diskon');
-            $table->integer('harga');
-            $table->integer('sub_total');
+            $table->double('harga');
+            $table->double('sub_total');
             $table->timestamps();
         });
     }
