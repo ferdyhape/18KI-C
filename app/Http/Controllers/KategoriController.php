@@ -52,11 +52,12 @@ class KategoriController extends Controller
 
         $request->validate([
             'nama' => ['required',  'string', 'max:50'],
-            'deskripsi' => ['max:255']
+            'deskripsi' => ['max:255'],
         ]);
 
         Kategori::create([
             'nama' => $request->nama,
+            'jumlah_produk' => 0,
             'deskripsi' => $request->deskripsi
         ]);
 
