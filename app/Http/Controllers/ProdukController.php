@@ -75,7 +75,7 @@ class ProdukController extends Controller
         $Kategori->update(['jumlah_produk' => $Kategori->jumlah_produk + 1]);
 
 
-        return redirect('/produk')->with('toast_success', 'Data successfully updated');
+        return redirect('/produk')->with('toast_success', $validated['nama'].' berhasil ditambahkan');
     }
 
     /**
@@ -143,7 +143,7 @@ class ProdukController extends Controller
             'harga' => $validated['harga'],
         ]);
 
-        return redirect('/produk');
+        return redirect('/produk')->with('toast_success', $validated['nama'].' berhasil diupdate');
     }
 
     /**
@@ -157,6 +157,6 @@ class ProdukController extends Controller
         $hapusProduk = Produk::find($id);
         File::delete('storage/' . $hapusProduk->gambar);
         $hapusProduk->delete();
-        return redirect('/produk');
+        return redirect('/produk')->with('toast_success', 'Produk berhasil dimusnahkan');
     }
 }
