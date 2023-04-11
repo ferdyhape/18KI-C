@@ -60,7 +60,7 @@ class KategoriController extends Controller
             'deskripsi' => $request->deskripsi
         ]);
 
-        return redirect('/kategori');
+        return redirect('/kategori')->with('toast_success', 'Kategori berhasil ditambahkan');
     }
 
     /**
@@ -103,7 +103,7 @@ class KategoriController extends Controller
         }
 
         $kategori->save();
-        return redirect('/kategori');
+        return redirect('/kategori')->with('toast_success', 'Kategori berhasil diupdate');
     }
 
     /**
@@ -115,6 +115,6 @@ class KategoriController extends Controller
     public function destroy($id)
     {
         Kategori::destroy($id);
-        return redirect('kategori');
+        return redirect('kategori')->with('toast_success', 'Kategori berhasil dimusnahkan');
     }
 }
