@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
             ProdukSeeder::class,
             // CartSeeder::class,
             // ItemOrderSeeder::class,
-            TransaksiSeeder::class,
-            ItemTransaksiSeeder::class,
+            // TransaksiSeeder::class,
+            // ItemTransaksiSeeder::class,
         ]);
     }
 }
