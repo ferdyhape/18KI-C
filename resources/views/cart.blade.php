@@ -110,14 +110,28 @@
                     <p class="fw-semibold">@toRP($cart->total_harga)
                     </p>
                 </div>
+                <hr class="mb-1">
                 <div class="d-grid mt-2 gap-2">
+                    @if (count($orders) != 0)
+                        <form action="{{ url('bayar/' . $cart->id) }}" id="formTunai" class="d-grid gap-2" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <input class="form-control @error('tunai') is-invalid @enderror" type="number"
+                                    name="tunai" placeholder="Tunai">
+                                @error('tunai')
+                                    <div class="form-text">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-success d-block">Bayar</button>
+                        </form>
+                    @endif
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
                         Tambah Produk
                     </button>
 
-                    <!-- Modal -->
+                    <!-- Modal tambah produk -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
@@ -160,13 +174,7 @@
                         </div>
                     </div>
                 </div>
-                @if (count($orders) != 0)
-                    <div class="btn btn-sm btn-success">
-                        Bayar
-                    </div>
-                @endif
             </div>
         </div>
-    </div>
     </div>
 @endsection
