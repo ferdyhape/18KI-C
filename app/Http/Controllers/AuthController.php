@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Welcome back, ' . auth()->user()->nama);
+            return redirect()->intended('/')->with('success', 'Selamat datang, ' . auth()->user()->nama);
         }
 
         return back()->withErrors([
@@ -49,6 +49,9 @@ class AuthController extends Controller
 
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData = User::create($validatedData);
+        Cart::create([
+            'user_id' => $validatedData->id
+        ]);
 
         return redirect('/login')->with('toast_success', 'Register sukses, silahkan login!');
     }
