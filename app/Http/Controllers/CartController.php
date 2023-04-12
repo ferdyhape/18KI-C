@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Produk;
 use App\Models\ItemOrder;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ class CartController extends Controller
     {
         $data['orders'] = ItemOrder::where('cart_id', 'like', $id)->get();
         $data['cart'] = Cart::find($id);
-        $data['produks'] = Produk::all();
+        // $data['produks'] = Produk::all();
+        $data['kategoris'] = Kategori::all();
         return view('cart', $data);
     }
 

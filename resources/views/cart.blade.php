@@ -144,12 +144,19 @@
                                 <form action="/item/add/{{ $cart->id }}">
                                     <div class="modal-body">
                                         <div class="form-group mt-2">
-                                            <select class="form-control @error('produk_id') is-invalid @enderror"
-                                                id="produk_id" name="produk_id" required>
-                                                <option value="0" disabled selected>Pilih Produk</option>
-                                                @foreach ($produks as $produk)
-                                                    <option value="{{ $produk->id }}">{{ $produk->nama }}</option>
+                                            <select class="form-control" id="kategori_dipilih">
+                                                <option value="0" disabled selected>Kategori</option>
+                                                @foreach ($kategoris as $kategori)
+                                                    <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
                                                 @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group mt-2">
+                                            <select class="form-control @error('produk_id') is-invalid @enderror"
+                                                id="select_produk" name="produk_id" required>
+                                                <option value="0" disabled selected>Pilih Produk</option>
+
                                             </select>
                                             @error('produk_id')
                                                 <div class="form-text">{{ $message }}</div>
@@ -177,4 +184,29 @@
             </div>
         </div>
     </div>
+    <script>
+        const select = document.getElementById('kategori_dipilih');
+
+        $("#kategori_dipilih").on('change', function() {
+            var kategori_id = $(this).val();
+            if (kategori_id) {
+                $.ajax({
+                    url: '/produk/getProduksByKategori/' + kategori_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var select = $('#select_produk');
+                        select.empty();
+                        select.append('<option value="0" disabled selected>Pilih Produk</option>');
+                        $.each(data.produks, function(key, value) {
+                            select.append('<option value="' + value.id + '">' + value.nama +
+                                '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#select_produk').empty();
+            }
+        });
+    </script>
 @endsection

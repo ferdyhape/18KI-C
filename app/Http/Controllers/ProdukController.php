@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
-use App\Models\Produk;
 use App\Models\Cart;
+use App\Models\Produk;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -16,6 +17,19 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function getProdukByKategori($id)
+    {
+        $dataProduct =
+            DB::table('produks')
+            ->where('kategori_id', '=', $id)
+            ->select('produks.*')
+            ->get();
+
+        return response()->json([
+            'produks' => $dataProduct,
+        ]);
+    }
     public function index()
     {
         // $data['produks'] = Produk::all();

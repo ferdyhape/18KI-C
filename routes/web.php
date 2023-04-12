@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+    Route::get('/produk/getProduksByKategori/{id}', [ProdukController::class, 'getProdukByKategori'])->name('produk.getByKategori');
 
     Route::get('/produk/add', [ProdukController::class, 'create']);
     // store = menyimpan data yang baru diinput
