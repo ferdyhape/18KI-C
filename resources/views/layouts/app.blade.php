@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -20,7 +24,18 @@
                 background-image: url("/assets/image/bg3.jpg");
             }
         </style>
+    @else
+        <style>
+            body {
+                background: rgb(91, 192, 248);
+                background: radial-gradient(circle, rgba(91, 192, 248, 1) 0%, rgba(0, 129, 201, 1) 100%);
+
+                /* background: rgb(91, 192, 248);
+                background: linear-gradient(90deg, rgba(91, 192, 248, 1) 0%, rgba(0, 129, 201, 1) 100%); */
+            }
+        </style>
     @endif
+
     @auth
         @include('partials.navbar')
     @endauth
