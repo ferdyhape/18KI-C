@@ -19,8 +19,7 @@ class CartController extends Controller
         $data['orders'] = ItemOrder::where('cart_id', 'like', $id)->get();
         $data['cart'] = Cart::find($id);
         $data['produks'] = Produk::all();
-        $data['carts'] = Cart::where('user_id', 'like', Auth::user()->id)->get();
-        return view('cart.newcart', $data);
+        return view('cart', $data);
     }
 
     public function tambahCart()
@@ -34,7 +33,7 @@ class CartController extends Controller
     {
         $produk = Produk::find($request->produk_id);
         $request->validate([
-            'jumlah_barang' => 'required|integer|min:0|max:' . $produk->stok,
+            'jumlah_barang' => 'required|integer|between:1,' . $produk->stok,
         ]);
         $tambahHarga = (((100 - $produk->diskon) / 100) * ($request->jumlah_barang * $produk->harga));
         $productAdd = ItemOrder::where('cart_id', $id)->where('produk_id', $request->produk_id)->first();
