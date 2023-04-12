@@ -7,9 +7,13 @@
                     <a class="nav-link text-white {{ request()->is('produk') ? 'border-bottom border-2' : '' }}"
                         href="{{ url('/produk') }}">Produk</a>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('kategori') ? 'border-bottom border-2' : '' }}"
                         href="{{ url('/kategori') }}">Kategori</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ request()->is('transaksi') || Route::currentRouteName() == 'transaksi.id' ? 'border-bottom border-2' : '' }}"
+                        href="{{ url('/transaksi') }}">Transaksi</a>
                 </li>
                 <li
                     class="nav-item dropdown {{ Route::currentRouteName() == 'cart.id' ? 'border-bottom border-2' : '' }}">
@@ -17,8 +21,16 @@
                         Cart
                     </a>
                     <ul class="dropdown-menu">
+                        @php
+                            use App\Models\Cart;
+                            $carts = Cart::where('user_id', 'like', Auth::user()->id)->get();
+                            $split = explode(' ', auth()->user()->nama);
+                            $firstname = $split[0];
+                        @endphp
+
                         @foreach ($carts as $cart)
-                            <li><a class="dropdown-item" href="/cart/{{ $cart->id }}">Cart {{ $cart->id }}</a>
+                            <li><a class="dropdown-item" href="/cart/{{ $cart->id }}">{{ $firstname }}'s
+                                    Cart {{ $loop->iteration }}</a>
                             </li>
                         @endforeach
                         <li><a class="dropdown-item" href="/cart/add">Tambah cart</a></li>
