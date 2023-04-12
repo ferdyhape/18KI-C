@@ -27,11 +27,13 @@
     @else
         <style>
             body {
-                background: rgb(91, 192, 248);
-                background: radial-gradient(circle, rgba(91, 192, 248, 1) 0%, rgba(0, 129, 201, 1) 100%);
+                /* background: rgb(91, 192, 248);
+                background: radial-gradient(circle, rgba(91, 192, 248, 1) 0%, rgba(0, 129, 201, 1) 100%); */
 
                 /* background: rgb(91, 192, 248);
                 background: linear-gradient(90deg, rgba(91, 192, 248, 1) 0%, rgba(0, 129, 201, 1) 100%); */
+
+                background-image: url("/assets/image/bg2.jpg");
             }
         </style>
     @endif
