@@ -21,5 +21,11 @@ class UserSeeder extends Seeder
             'alamat' => 'Bandung',
             'password' => bcrypt('password'),
         ]);
+        User::create([
+            'nama' => 'Ferdy',
+            'email' => 'ferdy@hape.com',
+            'alamat' => 'Korea Selatan',
+            'password' => bcrypt('password'),
+        ]);
     }
 }
