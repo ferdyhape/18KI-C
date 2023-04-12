@@ -17,7 +17,6 @@ class KategoriController extends Controller
     public function index()
     {
         $data['kategoris'] = Kategori::all();
-        $data['carts'] = Cart::where('user_id', 'like', Auth::user()->id)->get();
         return view('kategori', $data);
     }
 
@@ -61,7 +60,7 @@ class KategoriController extends Controller
             'deskripsi' => $request->deskripsi
         ]);
 
-        return redirect('/kategori')->with('toast_success', 'Kategori berhasil ditambahkan');
+        return redirect('/kategori')->with('toast_success', $request->nama . ' berhasil ditambahkan');
     }
 
     /**
@@ -104,7 +103,7 @@ class KategoriController extends Controller
         }
 
         $kategori->save();
-        return redirect('/kategori')->with('toast_success', 'Kategori berhasil diupdate');
+        return redirect('/kategori')->with('toast_success', $kategori->nama . ' berhasil diupdate');
     }
 
     /**
@@ -115,7 +114,8 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        Kategori::destroy($id);
-        return redirect('kategori')->with('toast_success', 'Kategori berhasil dimusnahkan');
+        $deletedKategori = Kategori::find($id);
+        $deletedKategori->delete();
+        return redirect('kategori')->with('toast_success', $deletedKategori->nama . ' berhasil dihapus');
     }
 }

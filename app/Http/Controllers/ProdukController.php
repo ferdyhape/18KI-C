@@ -22,7 +22,6 @@ class ProdukController extends Controller
         return view('produk', [
             'produks' => Produk::all(),
             'kategoris' => Kategori::all(),
-            'carts' => Cart::where('user_id', 'like', Auth::user()->id)->get()
         ]);
     }
 
@@ -75,7 +74,7 @@ class ProdukController extends Controller
         $Kategori->update(['jumlah_produk' => $Kategori->jumlah_produk + 1]);
 
 
-        return redirect('/produk')->with('toast_success', $validated['nama'].' berhasil ditambahkan');
+        return redirect('/produk')->with('toast_success', $validated['nama'] . ' berhasil ditambahkan');
     }
 
     /**
@@ -143,7 +142,7 @@ class ProdukController extends Controller
             'harga' => $validated['harga'],
         ]);
 
-        return redirect('/produk')->with('toast_success', $validated['nama'].' berhasil diupdate');
+        return redirect('/produk')->with('toast_success', $validated['nama'] . ' berhasil diupdate');
     }
 
     /**
@@ -157,6 +156,6 @@ class ProdukController extends Controller
         $hapusProduk = Produk::find($id);
         File::delete('storage/' . $hapusProduk->gambar);
         $hapusProduk->delete();
-        return redirect('/produk')->with('toast_success', 'Produk berhasil dimusnahkan');
+        return redirect('/produk')->with('toast_success', $hapusProduk->nama . ' berhasil dimusnahkan');
     }
 }
