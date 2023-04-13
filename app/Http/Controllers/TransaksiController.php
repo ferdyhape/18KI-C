@@ -78,6 +78,7 @@ class TransaksiController extends Controller
             'itemtransaksis' => $itemTransaksi,
         ]);
         // $pdf = PDF::loadView('tes');
-        return $pdf->download("t-$id.pdf");
+        $tanggal = date_format($transaksi->created_at, "Y-m-d");
+        return $pdf->download('18KI_' . $tanggal . '_' . $id . '.pdf');
     }
 }
