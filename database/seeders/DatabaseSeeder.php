@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             KategoriSeeder::class,
             ProdukSeeder::class,
-            // CartSeeder::class,
+            CartSeeder::class,
             // ItemOrderSeeder::class,
             // TransaksiSeeder::class,
             // ItemTransaksiSeeder::class,
