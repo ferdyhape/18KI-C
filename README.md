@@ -1,5 +1,7 @@
 # 18KI-C | UTS Studi Independen GITS ID
 
+<img src="https://user-images.githubusercontent.com/75787853/231803124-2fbb1e77-ac0b-467d-9c34-e1a49645adcc.png" width=50% height=70%><br>
+
 ## :rocket: Team
 - ``` Ferdy Hahan Pradana ```
 - ``` Laksono Prasetyo ```
