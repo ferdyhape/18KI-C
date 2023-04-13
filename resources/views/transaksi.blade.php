@@ -30,8 +30,8 @@
                                 <td>{{ $loop->iteration }} </td>
                                 <td>{{ $transaksi->id }}</td>
                                 <td>{{ $transaksi->created_at }}</td>
-                                <td>{{ $transaksi->tunai }}</td>
-                                <td>{{ $transaksi->kembali }}</td>
+                                <td>@toRP($transaksi->tunai)</td>
+                                <td>@toRP($transaksi->kembali)</td>
                                 <td>
                                     <a class="btn btn-warning show" href="{{ url('transaksi/' . $transaksi->id) }}"><i
                                             class="bi bi-eye-fill"></i></a>
