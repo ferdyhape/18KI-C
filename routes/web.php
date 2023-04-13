@@ -66,4 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/transaksi', [TransaksiController::class, 'index']);
     Route::get('/transaksi/{id}', [TransaksiController::class, 'show'])->name('transaksi.id');
     Route::post('/bayar/{id}', [TransaksiController::class, 'store'])->name('transaksi.store');
+
+
+    Route::get('print/{id}', [TransaksiController::class, 'printNota'])->name('transaksi.print');
 });

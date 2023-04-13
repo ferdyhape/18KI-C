@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Dompdf\Dompdf;
 use App\Models\Cart;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Models\Itemtransaksi;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class TransaksiController extends Controller
 {
     public function index()
     {
         return view('transaksi', [
-            'transaksis' => Transaksi::all(),
+            'transaksis' => Transaksi::orderBy('created_at', 'DESC')->get(),
         ]);
     }
     public function show($id)
@@ -34,7 +37,7 @@ class TransaksiController extends Controller
                 'tunai' => 'required|numeric|between:' . $cart->total_harga . ',9999999999999999999999999999999',
             ],
             [
-                'tunai.required' => 'kolom tunai harus diisi',
+                'tunai.required' => 'Kolom tunai harus diisi',
                 'tunai.between' => "Tunai harus diatas atau sama dengan total harga"
             ]
         );
@@ -64,5 +67,17 @@ class TransaksiController extends Controller
         $cart->save();
 
         return redirect("/cart/$id");
+    }
+
+    public function printNota($id)
+    {
+        $itemTransaksi = Itemtransaksi::where('transaksi_id', '=', $id)->get();
+        $transaksi = Transaksi::find($id);
+        $pdf = PDF::loadView('nota', [
+            'transaksis' => $transaksi,
+            'itemtransaksis' => $itemTransaksi,
+        ]);
+        // $pdf = PDF::loadView('tes');
+        return $pdf->download("t-$id.pdf");
     }
 }
