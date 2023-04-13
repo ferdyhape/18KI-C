@@ -66,7 +66,7 @@ class TransaksiController extends Controller
         $cart->total_harga = 0;
         $cart->save();
 
-        return redirect("/cart/$id");
+        return redirect("/cart/$id")->with('toast_success', 'Transaksi berhasil, lihat di halaman transaksi untuk riwayat transaksi');
     }
 
     public function printNota($id)
