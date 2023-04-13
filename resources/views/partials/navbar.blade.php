@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg bg-primary">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="#">18KI-C</a>
+        <a class="navbar-brand" href="#">
+            <img class="bg-white rounded-circle shadow-sm" src="{{ asset('assets/image/logo.png') }}" alt="Bootstrap"
+                width="40">
+        </a>
+        <a class="navbar-brand text-white fw-bold" href="#">18KI-C</a>
         <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
             <ul class="navbar-nav">
                 <li class="nav-item ">
