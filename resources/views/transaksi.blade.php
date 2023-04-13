@@ -33,8 +33,10 @@
                                 <td>@toRP($transaksi->tunai)</td>
                                 <td>@toRP($transaksi->kembali)</td>
                                 <td>
-                                    <a class="btn btn-warning show" href="{{ url('transaksi/' . $transaksi->id) }}"><i
+                                    <a class="btn btn-primary show" href="{{ url('transaksi/' . $transaksi->id) }}"><i
                                             class="bi bi-eye-fill"></i></a>
+                                    <a class="btn btn-success show" href="{{ url('print/' . $transaksi->id) }}"><i
+                                            class="bi bi-download"></i></a>
                                 </td>
                             </tr>
                         @endforeach

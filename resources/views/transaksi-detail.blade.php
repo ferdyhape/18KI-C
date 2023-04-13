@@ -64,8 +64,21 @@
                     <p class="fw-semibold">@toRP($transaksis->total_harga)
                     </p>
                 </div>
+                <div class="d-flex justify-content-between">
+                    <p class="fw-semibold">Bayar</p>
+                    <p class="fw-semibold">@toRP($transaksis->tunai)
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="fw-semibold">Kembali</p>
+                    <p class="fw-semibold">@toRP($transaksis->kembali)
+                    </p>
+                </div>
             </div>
             <div class="d-grid">
+                <a class="btn btn-sm btn-success mt-2" href="{{ url("print/$transaksis->id") }}">
+                    Download
+                </a>
                 <a class="btn btn-sm btn-primary mt-2" href="{{ url()->previous() }}">
                     Kembali
                 </a>
