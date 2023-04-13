@@ -50,16 +50,14 @@
 
 9.  Login with this crediential
 
-    - If you want to use admin role (can dashboard access):
-
-        Email: 
-        ```
-        admin@admin.com
-        ```
-        Password: 
-        ```
-        password
-        ```
+    Email: 
+    ```
+    admin@admin.com
+    ```
+    Password: 
+    ```
+    password
+    ```
         
 10. Enjoy use!
 
