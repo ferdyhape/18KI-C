@@ -168,8 +168,13 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         $hapusProduk = Produk::find($id);
+
+        $kategori = Kategori::find($hapusProduk->kategori_id);
+        $kategori->jumlah_produk -= 1;
+        $kategori->save();
+
         File::delete('storage/' . $hapusProduk->gambar);
         $hapusProduk->delete();
-        return redirect('/produk')->with('toast_success', $hapusProduk->nama . ' berhasil dimusnahkan');
+        return redirect('/produk')->with('toast_success', $hapusProduk->nama . ' berhasil dihapus');
     }
 }
