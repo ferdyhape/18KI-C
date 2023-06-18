@@ -16,7 +16,7 @@
 ## :open_book: How To Use
 1.  Clone this repository
     ```
-    git clone https://github.com/ferdyhape/latihan_minibos_gits.git
+    git clone https://github.com/ferdyhape/18KI-C.git
     ```
 2.  Copy paste **.env.example** file and rename as **.env**
 3.  Adjust the database name in the env file on **DB_DATABASE**
