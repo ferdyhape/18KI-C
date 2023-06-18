@@ -35,7 +35,8 @@
                                 <td>{{ $produk->nama }}</td>
                                 <td>{{ $produk->kategori->nama }}</td>
                                 <td>{{ $produk->deskripsi }}</td>
-                                <td>{{ $produk->harga }}</td>
+                                <td>@toRP($produk->harga)</td>
+                                {{-- <td>{{ $produk->harga }}</td> --}}
                                 <td>{{ $produk->stok }}</td>
                                 <td class="text-center">{{ $produk->diskon }}</td>
                                 <td>
